@@ -9,7 +9,7 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-<title>Simple Blog | Tambah Post</title>
+<title>Just Blog | Edit Post</title>
 
 
 </head>
@@ -21,7 +21,7 @@
     <a style="border:none;" id="logo" href="index.php"><img id="aang" src="Aang.png" /></a>
     <ul class="nav-primary">
         <div id="hed">
-        <li><a>Add Post</a></li>
+        <li><a>Edit Post</a></li>
             
         <a href="new_post.php"><img id="addico" src="plus.png" /></a>
      </div>
@@ -33,27 +33,45 @@
 
 
     <h2 class="art-title" style="margin-bottom:40px">-</h2>
-
+	<?php
+	$con=mysqli_connect("localhost","root","","datapost");
+	if (mysqli_connect_errno()) {
+		echo "Failed to connect to MySQL: " .mysql_conneect_error();
+	}
+	$ids = $_GET['id'];
+	$result = mysqli_query($con,"SELECT * FROM postingan WHERE IDpost = $ids");
+	while($row = mysqli_fetch_array($result)) {
+	$Judul = $row['Judul'];
+	$Tanggal = $row['Tanggal'];
+	$Konten = $row['Konten'];
+	}
+	?>
     <div class="art-body">
         <div class="art-body-inner">
-                <form method="post" name="form1" action="ngepost.php">
-               
-                    <input type="text" name="Judul" id="Judul" placeholder="Judul">
+            <div id="contact-area">
+                <form method="post" name="form1" action="edit_post.php?id=<?php echo $ids; ?>" >
+     
+                    <input type="text" name="Judul" id="Judul" value="<?php echo $Judul?>">
+                    
                     <div id="Tgl">
-                    <input type="text" name="Tanggal" id="Tanggal" onchange="return cektanggal()" placeholder="YYYY-MM-DD" maxlength="10">
+             
+                    <input type="text" value="<?php echo $Tanggal?>" name="Tanggal" id="Tanggal" placeholder="YYYY-MM-DD" maxlength="10" onchange="return cektanggal()">
                     <p id="note">Tanggal Salah!</p>
                     </div>
-                    <textarea name="Konten" rows="20" cols="20" id="Konten" placeholder="konten"></textarea>
-                    <input type="submit" name="submit" id="subpost" value="Simpan" onclick="return cektanggal()" class="submit-button">
+                        
+
+                    <textarea name="Konten" rows="20" cols="20" id="Konten"><?php echo $Konten?></textarea>
+
+                    <input type="submit" name="submit" onclick="return cektanggal()" value="Simpan" class="submit-button">
                 </form>
-            
-        
+            </div>
+        </div>
     </div>
 
 </article>
 
 </div>
-
+<?php mysqli_close($con);?>
 <script type="text/javascript">
 
 function cektanggal()
