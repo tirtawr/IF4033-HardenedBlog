@@ -34,7 +34,7 @@ if(isset($_POST)){
 	mysql_query($sql);
 
 	
-	header("Location: index.php");
+	header("Location: home.php");
 	
 
 	

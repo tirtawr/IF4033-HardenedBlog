@@ -1,13 +1,21 @@
-<?php require "header.php"; ?>
+<?php require "header.php"; session_start();
+if ($_SESSION["user"] == null){
+  header('location:index.php');
+}?>
 
 <body class="default">
 <div class="wrapper">
 
 <nav class="nav">
-    <a style="border:none;" id="logo" href="index.php"><h1>Tirta<span>-</span>Wening<span>-</span>Rachman</h1></a>
+    <a style="border:none;" id="logo" href="home.php"><img id="aang" src="Aang.png" /></a>
     <ul class="nav-primary">
-        <li><a href="new_post.php">+ Tambah Post</a></li>
+        <div id="homediv">
+        <li><a id="home">Home</a></li>
+            
+        <a href="new_post.php"><img id="addico" src="plus.png" /></a>
+     </div>
     </ul>
+    
 </nav>
 
 <article class="art simple post">
@@ -20,15 +28,18 @@
             <h2>Tambah Post</h2>
 
             <div id="contact-area">
-                <form method="post" name="formPost" action="new_post_helper.php" onsubmit="return validate();">
+                <form method="post" name="formPost" action="new_post_helper.php" onsubmit="return validate();" enctype="multipart/form-data">
                     <label for="Judul">Judul:</label>
-                    <input type="text" name="Judul" id="Judul" value=''>
+                    <input type="text" name="Judul" id="Judul" value='' required>
 
                     <label for="Tanggal">Tanggal:</label>
-                    <input type="date" name="Tanggal" id="Tanggal" value=''>
+                    <input type="date" name="Tanggal" id="Tanggal" value='' required>
                     
                     <label for="Konten">Konten:</label><br>
-                    <textarea name="Konten" rows="20" cols="20" id="Konten"></textarea>
+                    <textarea name="Konten" rows="20" cols="20" id="Konten" required></textarea>
+
+                    <label for="Konten">Gambar:</label><br>
+                    <input type="file" name="fileToUpload" id="fileToUpload">
 
                     <input type="submit" name="submit" value="Simpan" class="submit-button">
                 </form>

@@ -26,13 +26,14 @@
 <meta property="og:site_name" content="Simple Blog">
 
 <link rel="stylesheet" type="text/css" href="assets/css/screen.css" />
+<link href="assets/css/bootstrap.css" type="text/css" rel="stylesheet">
 <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
-
+<link rel="icon" type="image/png" href="Aang.png">
 <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-<title>Tirta's Simple Blog</title>
+<title>Simple Blog</title>
 
 
 </head>

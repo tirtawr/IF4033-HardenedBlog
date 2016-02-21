@@ -1,6 +1,10 @@
 <?php require "header.php"; ?>
 
 <?php
+    session_start();
+if ($_SESSION["user"] == null){
+  header('location:index.php');
+}
     require "db_handler.php";
   if (!isset($_GET['post_id'])){
     throw new Exception("Missing parameter: post_id");
@@ -16,10 +20,15 @@
 <div class="wrapper">
 
 <nav class="nav">
-    <a style="border:none;" id="logo" href="index.php"><h1>Tirta<span>-</span>Wening<span>-</span>Rachman</h1></a>
+    <a style="border:none;" id="logo" href="home.php"><img id="aang" src="Aang.png" /></a>
     <ul class="nav-primary">
-        <li><a href="new_post.html">+ Tambah Post</a></li>
+        <div id="homediv">
+        <li><a id="home">Home</a></li>
+            
+        <a href="new_post.php"><img id="addico" src="plus.png" /></a>
+     </div>
     </ul>
+    
 </nav>
 
 <article class="art simple post">
