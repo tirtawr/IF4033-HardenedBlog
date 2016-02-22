@@ -1,42 +1,66 @@
-<?php require "header.php"; session_start(); if ($_SESSION["login"] == null) {$_SESSION["login"] = 1;} echo $_SESSION["login"]; ?>
+<?php 
+    require "header.php"; 
+    session_start();
+    if (!isset($_SESSION["login"])) {
+        $_SESSION["login"] = 1;
+    } 
+?>
+<body>
 
-<div class="wrapper">
-<article class="art simple post">
- 	 <header class="art-header">
-        <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
-            <h2 class="art-title">Aangs' Blog</h2>
-            <p class="art-subtitle"></p>
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('img/about-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>AirBenders' Blog</h1>
+                        <hr class="small">
+                        <span class="subheading">This is what I do.</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
- 	<div class="art-body">
-        <div class="art-body-inner">
- 			<div id="contact-area">
-                <form method="post" name="formPost" action="user_helper.php" onsubmit="return validate();">
-                    <label for="username">username:</label>
-                    <input type="text" name="username" id="username" value='' required>
 
-                    <label for="Password">Password:</label>
-                    <input type="password" name="password" id="password" value='' required>
+<!-- page start-->
+<div class="container">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Login</a></li>
+    <li><a data-toggle="tab" href="#menu1">Register</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>Login</h3>
+            <div id="contact-area">
+                <form method="post" name="formPost" action="user_helper.php" onsubmit="return validate();">
+                    <input type="text" placeholder="Username" name="username" id="username" value='' required>
+                    <input type="password" placeholder="Password" name="password" id="password" value='' required>
 
                     <input type="submit" name="submit" value="Login" class="submit-button">
                 </form>
             </div>
-            
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Register</h3>
             <div id="contact-area">
                 <form method="post" name="formPost" action="user_helper.php" onsubmit="return validate();">
-                  	<label for="username">username:</label>
-                    <input type="text" name="username" id="username" value='' required>
 
-                    <label for="Password">Password:</label>
-                    <input type="password" name="password" id="password" value='' required>
+                    <input type="text" placeholder="Username"  name="username" id="username" value='' required>
+                    <input type="password" placeholder="Password"  name="password" id="password" value='' required>
+                    <input type="email" placeholder="Email" name="email" id="email" required>
 
-                    <label for="Email">Email:</label>
-                    <input type="email" name="email" id="email" required>
-
-                    <input type="submit" name="submit" value="Daftar" class="submit-button">
+                    <input type="submit" name="submit" value="Register" class="submit-button">
                 </form>
             </div>
-        </div>
     </div>
-</article>
+  </div>
 </div>
+
+</body>
+
+    <hr>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>

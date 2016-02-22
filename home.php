@@ -9,78 +9,68 @@ require "header.php"; ?>
   $posts = getPosts();
 ?>
 
-<body class="default">
-<div class="wrapper">
+<body>
 
-<nav class="nav">
-    <a style="border:none;" id="logo" href="home.php"><img id="aang" src="Aang.png" /></a>
-    <ul class="nav-primary">
-        <div id="homediv">
-        <li><a id="home">Home</a></li>
-            
-        <a href="new_post.php"><img id="addico" src="plus.png" /></a>
-     </div>
-    </ul>
-    
-</nav>
-<div id="home">
-    <div class="posts">
-        <nav class="art-list">
-          <ul class="art-list-body">
-            <?php foreach($posts as $post) : ?>
-            <li class='art-list-item' id='<?=$post['post_id'];?>'>
-                <div class='art-list-item-title-and-time'>
-                    <h2 class='art-list-title'><a href='post.php?post_id=<?=$post['post_id'];?>' ><?=$post['post_title'];?></a></h2>
-                    <div class="art-list-time"><?=$post['post_date'];?></div>
-                    <div class="art-list-time"><span style="color:#F40034;">&#10029;</span> Featured</div>
+    <?php require "navigation.php"; ?>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-repeat: no-repeat;background-attachment: fixed; background-position: top; background-image: url('img/be-the-leaf.jpg');">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>AirBenders' Blog</h1>
+                        <hr class="small">
+                        <span class="subheading">What A World!</span>
+                    </div>
                 </div>
-                <p><?=$post['post_content'];?></p>
-                <p>
-                  <a href="edit_post.php?post_id=<?=$post['post_id'];?>">Edit</a> | <a onclick="hapusPost(<?=$post['post_id'];?>)">Hapus</a>
-                  
+            </div>
+        </div>
+    </header>
 
-
-
-                </p>
-            </li>
-            <?php endforeach; ?>
-          </ul>
-        </nav>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <?php foreach($posts as $post) : ?>
+                <div class="post-preview">
+                    <a href="post.php?post_id=<?=$post['post_id'];?>">
+                        <h2 class="post-title">
+                            <?=$post['post_title'];?>
+                        </h2>
+                        <h3 class="post-subtitle">
+                            <?=$post['post_content'];?>
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by <a href="#"><?=$post['username'];?></a> on <?=$post['post_date'];?></p>
+                    <a href="edit_post.php?post_id=<?=$post['post_id'];?>">Edit</a> | <a onclick="hapusPost(<?=$post['post_id'];?>)">Hapus</a>
+                </div>
+                <hr>
+                <?php endforeach; ?>              
+            </div>
+        </div>
     </div>
-</div>
 
-
-
-
+    <hr>
 <?php require "footer.php"; ?>
 
-</div>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
 
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/clean-blog.min.js"></script>
+    <script type="text/javascript">
+        function hapusPost(hea){
+            if (confirm("Apakah Anda yakin menghapus post ini?")){
+                window.location.href = "del_post.php?post_id=".concat(hea);
+          
+            }
+        }
+    </script>
 </body>
-
-
-<script type="text/javascript">
-  function hapusPost(hea){
-    if (confirm("Apakah Anda yakin menghapus post ini?")){
-      window.location.href = "del_post.php?post_id=".concat(hea);
-      
-    }
-  }
-</script>
-
-
-<script type="text/javascript" src="assets/js/fittext.js"></script>
-<script type="text/javascript" src="assets/js/app.js"></script>
-<script type="text/javascript" src="assets/js/respond.min.js"></script>
-<script type="text/javascript">
-  var ga_ua = '{{! TODO: ADD GOOGLE ANALYTICS UA HERE }}';
-
-  (function(g,h,o,s,t,z){g.GoogleAnalyticsObject=s;g[s]||(g[s]=
-      function(){(g[s].q=g[s].q||[]).push(arguments)});g[s].s=+new Date;
-      t=h.createElement(o);z=h.getElementsByTagName(o)[0];
-      t.src='//www.google-analytics.com/analytics.js';
-      z.parentNode.insertBefore(t,z)}(window,document,'script','ga'));
-      ga('create',ga_ua);ga('send','pageview');
-</script>
 
 </html>

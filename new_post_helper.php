@@ -25,7 +25,7 @@ if(isset($_POST)){
 	
 
 	if ($_FILES["fileToUpload"] != null){
-		$target_dir = "uploads/";
+		$target_dir = "img/";
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 		$uploadOk = 1;
 		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -72,7 +72,7 @@ if(isset($_POST)){
 		}
 		
 	} else {
-		$sql = "INSERT INTO `tb_post`(`username`,`post_title`,`post_date`,`post_content`) VALUES ('$user','$judul','$tanggal','$konten')";
+		$sql = "INSERT INTO `tb_post`(`username`,`post_title`,`post_date`,`post_content`, `image_path`) VALUES ('$user','$judul','$tanggal','$konten', 'img/aang.jpg')";
 		mysql_query($sql);	
 	}
 	

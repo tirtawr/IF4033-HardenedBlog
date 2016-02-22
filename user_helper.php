@@ -1,9 +1,8 @@
 <?php
 	session_start();
 	//cek Brutforce login
-
-	if ($_SESSION["login"]> 10){
-		header('location:fdsfsdf.html');
+	if ($_SESSION["login"]> 10 || !isset($_SESSION["login"]){
+		header('location:youbastart.html');
 	}else{
 		require "db_handler.php";
 		$username = $_POST['username'];

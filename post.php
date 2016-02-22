@@ -10,76 +10,97 @@ require "db_handler.php";
     $post = getPost($_GET['post_id']);
 ?>
 <?php require "header.php"; ?>
-<body class="default">
-<div class="wrapper">
-
-<nav class="nav">
-    <a style="border:none;" id="logo" href="home.php"><img id="aang" src="Aang.png" /></a>
-    <ul class="nav-primary">
-        <div id="homediv">
-        <li><a id="home">Home</a></li>
-            
-        <a href="new_post.php"><img id="addico" src="plus.png" /></a>
-     </div>
-    </ul>
+<body>
+    <?php require "navigation.php"; ?>
     
-</nav>
-
-<article class="art simple post">
-    
-    <header class="art-header">
-        <div class="art-header-inner" style="margin-top: 0px; opacity: 1;">
-            <time class="art-time"><?=$post['post_date'];?></time>
-            <h2 class="art-title"><?=$post['post_title'];?></h2>
-            <p class="art-subtitle"></p>
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-repeat: no-repeat;background-attachment: fixed; background-position: top;background-image: url('<?=$post['image_path'];?>')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading" style="background-color:hsla(222,100%,50%,0.3);">
+                        <h1><?=$post['post_title'];?></h1>
+                        <span class="meta">Posted by <a href="#"><?=$post['username'];?></a> on <?=$post['post_date'];?></span>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <div class="art-body">
-        <div class="art-body-inner">
-            <hr class="featured-article" />
-            <img src="<?=$post['image_path'];?>">
-            <p><?=$post['post_content'];?></p>
-            <hr />
-            
-            <h2>Komentar</h2>
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p><?=$post['post_content'];?></p>
+                </div>
+            </div>
+        </div>
+    </article>
 
-            <div id="contact-area">
-              <div id="error-message">
-              </div>
+    <hr>
+
+     <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>Have Toughts with this post? spread the comment!</p>
+                <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+                <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+                <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
                 <form method="post" action="#" name="komentar">
                     <input type="hidden" name="post_id" value="<?=$post['post_id'];?>"/>
-                    <label for="Nama">Nama:</label>
-                    <input type="text" name="nama" id="nama">
-        
-                    <label for="Email">Email:</label>
-                    <input type="email" name="email" id="email">
-                    
-                    <label for="Komentar">Komentar:</label><br>
-                    <textarea name="komentar" rows="20" cols="20" id="komentar"></textarea>
-
-                    <input type="button" name="submit" value="Kirim" class="submit-button" onclick="addComment(<?=$post['post_id'];?>)">
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Name</label>
+                            <input type="text" class="form-control" placeholder="Name" name="nama" id="nama" required>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Email Address</label>
+                            <input type="email" class="form-control" placeholder="Email Address" name="email" id="email" required>
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            <label>Comment</label>
+                            <textarea rows="5" class="form-control" placeholder="Message" name="komentar" id="komentar" required></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div id="success"></div>
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                            <input type="button" name="submit" value="Kirim" class="submit-button btn btn-default" onclick="addComment(<?=$post['post_id'];?>)">
+                        </div>
+                    </div>
                 </form>
-
             </div>
-
-            <ul class="art-list-body" id='comments'>
-                <p>Komentar - komentarnya harusnya ada di sini</p>
-                
-            </ul>
         </div>
     </div>
-
-</article>
-</div>
+    <br>
+     <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="art-list-body" id='comments'>
+                    <p>List Komentar</p>
+                
+                </ul>
+            </div>
+        </div>
+    </div>
 <?php require "footer.php"; ?>
 
-<script type="text/javascript" src="assets/js/jquery.min.js"></script>
-<script type="text/javascript" src="assets/js/fittext.js"></script>
-<script type="text/javascript" src="assets/js/app.js"></script>
-<script type="text/javascript" src="assets/js/respond.min.js"></script>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
 
-<script type="text/javascript">
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/clean-blog.min.js"></script>
+    <script type="text/javascript">
     
 
 
@@ -136,4 +157,5 @@ require "db_handler.php";
 
 </script>
 </body>
+
 </html>
