@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	//cek Brutforce login
-	if ($_SESSION["login"]> 10 || !isset($_SESSION["login"]){
+	if ($_SESSION["login"]> 10 || !isset($_SESSION["login"])) {
 		header('location:youbastart.html');
 	}else{
 		require "db_handler.php";
@@ -36,7 +36,7 @@
 		$query = "SELECT * FROM `tb_user` WHERE username = '$q'";
 		$hasil = mysql_query($query);
 		$data = mysql_fetch_array($hasil);
-		
+
 		if ($data['username'] != ""){
 			if ($data['password'] == $p){
 				session_destroy();

@@ -17,14 +17,16 @@ if (!$con){
 
 
 if(isset($_POST)){
-	
+
 	$judul = $_POST['Judul'];
 	$tanggal = $_POST['Tanggal'];
 	$konten = $_POST['Konten'];
 
-	
 
-	if ($_FILES["fileToUpload"] != null){
+
+	// if ($_FILES["fileToUpload"] != null){
+	if (false){
+
 		$target_dir = "img/";
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 		$uploadOk = 1;
@@ -64,23 +66,26 @@ if(isset($_POST)){
 		} else {
 		    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 		        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-		        $sql = "INSERT INTO `tb_post`(`username`,`post_title`,`post_date`,`post_content`, `image_path`) VALUES ('$user','$judul','$tanggal','$konten', '$target_file')";	
+		        $sql = "INSERT INTO `tb_post`(`username`,`post_title`,`post_date`,`post_content`, `image_path`) VALUES ('$user','$judul','$tanggal','$konten', '$target_file')";
 		        mysql_query($sql);
 		    } else {
 		        echo "Sorry, there was an error uploading your file.";
 		    }
 		}
-		
+
 	} else {
 		$sql = "INSERT INTO `tb_post`(`username`,`post_title`,`post_date`,`post_content`, `image_path`) VALUES ('$user','$judul','$tanggal','$konten', 'img/aang.jpg')";
-		mysql_query($sql);	
+		mysql_query($sql);
+
+		header("Location: home.php");
+		die();
 	}
-	
+
 
 	//header("Location: home.php");
-	
 
-	
+
+
 }else{
 	echo "Nggak jalan bro";
 }

@@ -1,9 +1,17 @@
-<?php 
-    require "header.php"; 
+<?php
     session_start();
+    
+    if (isset($_SESSION["user"])){
+      header('location:home.php');
+      die();
+    }
+
+
     if (!isset($_SESSION["login"])) {
         $_SESSION["login"] = 1;
-    } 
+    }
+
+    require "header.php";
 ?>
 <body>
 
