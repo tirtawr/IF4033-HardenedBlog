@@ -5,8 +5,8 @@
 		header('location:youbastart.html');
 	}else{
 		require "db_handler.php";
-		$username = mysql_real_escape_string($_POST['username']);
-		$password = mysql_real_escape_string($_POST['password']);
+		$username = htmlentities(mysql_real_escape_string($_POST['username']));
+		$password = htmlentities(mysql_real_escape_string($_POST['password']));
 		$email = mysql_real_escape_string($_POST['email']);
 		$password = hash('sha256', $password);
 		if ($email == null){

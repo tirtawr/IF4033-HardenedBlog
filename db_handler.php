@@ -42,10 +42,10 @@ function getComments($post_id){
 }
 
 function addComment($data){
-	$post_id = mysql_real_escape_string($data['post_id']);
-	$nama = mysql_real_escape_string($data['name']);
-	$email = mysql_real_escape_string($data['email']);
-	$komentar = mysql_real_escape_string($data['post_comment']);
+	$post_id = htmlentities(mysql_real_escape_string($data['post_id']));
+	$nama = htmlentities(mysql_real_escape_string($data['name']));
+	$email = htmlentities(mysql_real_escape_string($data['email']));
+	$komentar = htmlentities(mysql_real_escape_string($data['post_comment']));
 	$sql = "INSERT INTO `tb_comments`(`post_id`,`name`,`email`,`post_comment`) VALUES ('$post_id','$nama','$email','$komentar') ";
 	mysql_query($sql);
 }

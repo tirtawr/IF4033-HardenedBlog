@@ -18,9 +18,9 @@ if (!$con){
 
 if(isset($_POST)){
 
-	$judul = $_POST['Judul'];
-	$tanggal = $_POST['Tanggal'];
-	$konten = $_POST['Konten'];
+	$judul = htmlentities(mysql_real_escape_string($_POST['Judul']));
+	$tanggal = htmlentities(mysql_real_escape_string($_POST['Tanggal']));
+	$konten = htmlentities(mysql_real_escape_string($_POST['Konten']));
 
 
 
