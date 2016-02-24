@@ -24,7 +24,7 @@ function getPosts($page = null){
 }
 
 function getPost($post_id){
-	$sql = "SELECT * FROM `tb_post` WHERE `post_id` = $post_id";
+	$sql = sprintf("SELECT * FROM `tb_post` WHERE `post_id` = %d", $post_id);
 	$resource = mysql_query($sql);
 	while($row = mysql_fetch_array($resource)){
 		return $row;
@@ -32,7 +32,7 @@ function getPost($post_id){
 }
 
 function getComments($post_id){
-	$sql = "SELECT * FROM `tb_comments` WHERE `post_id`=$post_id ORDER BY cmt_id DESC";
+	$sql = sprintf("SELECT * FROM `tb_comments` WHERE `post_id`=%d ORDER BY cmt_id DESC", $post_id);
 	$resource = mysql_query($sql);
 	$result = array();
 	while ($row = mysql_fetch_array($resource)){
@@ -42,16 +42,13 @@ function getComments($post_id){
 }
 
 function addComment($data){
-	$post_id = $data['post_id']; 
-	$nama = $data['name'];
-	$email = $data['email']; 
-	$komentar = $data['post_comment']; 
+	$post_id = mysql_real_escape_string($data['post_id']);
+	$nama = mysql_real_escape_string($data['name']);
+	$email = mysql_real_escape_string($data['email']);
+	$komentar = mysql_real_escape_string($data['post_comment']);
 	$sql = "INSERT INTO `tb_comments`(`post_id`,`name`,`email`,`post_comment`) VALUES ('$post_id','$nama','$email','$komentar') ";
 	mysql_query($sql);
 }
 
 
 ?>
-
-
-
