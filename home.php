@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 if ($_SESSION["user"] == null){
   header('location:index.php');
@@ -47,7 +47,7 @@ require "header.php"; ?>
                     <a href="edit_post.php?post_id=<?=$post['post_id'];?>">Edit</a> | <a onclick="hapusPost(<?=$post['post_id'];?>)">Hapus</a>
                 </div>
                 <hr>
-                <?php endforeach; ?>              
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
@@ -65,10 +65,8 @@ require "header.php"; ?>
     <script src="js/clean-blog.min.js"></script>
     <script type="text/javascript">
         function hapusPost(hea){
-            if (confirm("Apakah Anda yakin menghapus post ini?")){
                 window.location.href = "del_post.php?post_id=".concat(hea);
-          
-            }
+
         }
     </script>
 </body>

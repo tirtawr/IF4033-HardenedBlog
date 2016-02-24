@@ -1,18 +1,8 @@
 <?php
 session_start();
 $user = $_SESSION["user"];
-$host = "localhost";
-$username = "root";
-$password = "";
-$database = "simple_blog";
-$con = mysql_connect($host,$username,$password);
 
-if (!$con){
-	echo "db connection error";
-	throw new Exception("Database connection error");
-} else {
-	mysql_select_db($database,$con);
-}
+require 'db_handler.php';
 
 
 

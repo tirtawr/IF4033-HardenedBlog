@@ -22,16 +22,7 @@
 		}
 	}
 
-	function cekuser($q) {
-		$query = "SELECT * FROM `tb_user` WHERE username = '$q'";
-		$hasil = mysql_query($query);
-		$data = mysql_fetch_array($hasil);
-		if ($data['username'] == ""){
-			return false;
-		}else{
-			return true;
-		}
-	}
+
 	function login($q, $p) {
 		$query = "SELECT * FROM `tb_user` WHERE username = '$q'";
 		$hasil = mysql_query($query);
