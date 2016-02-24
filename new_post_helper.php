@@ -24,8 +24,8 @@ if(isset($_POST)){
 
 
 
-	// if ($_FILES["fileToUpload"] != null){
-	if (false){
+	if ($_FILES["fileToUpload"]["name"] != ''){
+	// if (false){
 
 		$target_dir = "img/";
 		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
