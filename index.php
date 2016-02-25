@@ -1,74 +1,75 @@
+<?php 
+session_start();
+require "header.php"; ?>
 <?php
-    session_start();
-    
-    if (isset($_SESSION["user"])){
-      header('location:home.php');
-      die();
-    }
-
-
-    if (!isset($_SESSION["login"])) {
-        $_SESSION["login"] = 1;
-    }
-
-    require "header.php";
+  require "db_handler.php";
+  $posts = getPosts();
 ?>
+
 <body>
+
+    <?php require "navigation.php"; ?>
 
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('img/about-bg.jpg')">
+    <header class="intro-header" style="background-repeat: no-repeat;background-attachment: fixed; background-position: top; background-image: url('img/be-the-leaf.jpg');">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="page-heading">
+                    <div class="site-heading">
                         <h1>AirBenders' Blog</h1>
                         <hr class="small">
-                        <span class="subheading">This is what I do.</span>
+                        <span class="subheading">What A World!</span>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-<!-- page start-->
-<div class="container">
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">Login</a></li>
-    <li><a data-toggle="tab" href="#menu1">Register</a></li>
-  </ul>
-
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-      <h3>Login</h3>
-            <div id="contact-area">
-                <form method="post" name="formPost" action="user_helper.php" onsubmit="return validate();">
-                    <input type="text" placeholder="Username" name="username" id="username" value='' required>
-                    <input type="password" placeholder="Password" name="password" id="password" value='' required>
-
-                    <input type="submit" name="submit" value="Login" class="submit-button">
-                </form>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <?php foreach($posts as $post) : ?>
+                <div class="post-preview">
+                    <a href="post.php?post_id=<?=$post['post_id'];?>">
+                        <h2 class="post-title">
+                            <?=$post['post_title'];?>
+                        </h2>
+                        <h3 class="post-subtitle">
+                            <?=$post['post_content'];?>
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by <a href="#"><?=$post['username'];?></a> on <?=$post['post_date'];?></p>
+                    <?php if(isset($_SESSION["user"])&& $_SESSION["user"] === $post['username']) { ?>
+                    <a href="edit_post.php?post_id=<?=$post['post_id'];?>">Edit</a> | <a onclick="hapusPost(<?=$post['post_id'];?>)">Hapus</a>
+                    <?php } ?>
+                </div>
+                <hr>
+                <?php endforeach; ?>              
             </div>
+        </div>
     </div>
-    <div id="menu1" class="tab-pane fade">
-      <h3>Register</h3>
-            <div id="contact-area">
-                <form method="post" name="formPost" action="user_helper.php" onsubmit="return validate();">
-
-                    <input type="text" placeholder="Username"  name="username" id="username" value='' required>
-                    <input type="password" placeholder="Password"  name="password" id="password" value='' required>
-                    <input type="email" placeholder="Email" name="email" id="email" required>
-
-                    <input type="submit" name="submit" value="Register" class="submit-button">
-                </form>
-            </div>
-    </div>
-  </div>
-</div>
-
-</body>
 
     <hr>
+<?php require "footer.php"; ?>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/clean-blog.min.js"></script>
+    <script type="text/javascript">
+        function hapusPost(hea){
+            if (confirm("Apakah Anda yakin menghapus post ini?")){
+                window.location.href = "del_post.php?post_id=".concat(hea);
+          
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -33,7 +33,12 @@ function getPost($post_id){
 	}
 }
 
-function editPost($judul, $tanggal, $konten, $id){
+function editPost($judul, $tanggal, $konten, $id, $path_image){
+	$sql = "UPDATE `simple_blog`.`tb_post` SET `post_title` = '$judul', `post_date` = '$tanggal', `post_content` = '$konten', `image_path` = '$path_image' WHERE `tb_post`.`post_id` = $id;";
+	mysql_query($sql);
+}
+
+function editPostNoPict($judul, $tanggal, $konten, $id){
 	$sql = "UPDATE `simple_blog`.`tb_post` SET `post_title` = '$judul', `post_date` = '$tanggal', `post_content` = '$konten' WHERE `tb_post`.`post_id` = $id;";
 	mysql_query($sql);
 }

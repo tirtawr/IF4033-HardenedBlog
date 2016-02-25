@@ -17,7 +17,7 @@
 			}else{
 				$sql = "INSERT INTO `tb_user`(`username`,`password`,`email`) VALUES ('$username','$password','$email') ";
 				mysql_query($sql);
-				header('location:index.php');
+				header('location:login.php');
 			}
 		}
 	}
@@ -33,14 +33,14 @@
 				session_destroy();
 				session_start();
 				$_SESSION["user"] = $q;
-				header('location:home.php');
+				header('location:index.php');
 			}else {
 				$_SESSION["login"]++;
-				header('location:index.php');
+				header('location:login.php');
 			}
 		}else{
 			$_SESSION["login"]++;
-			header('location:index.php');
+			header('location:login.php');
 		}
 	}
 ?>

@@ -18,9 +18,9 @@ if(isset($_POST)){
 	// if (false){
 
 		$target_dir = "img/";
-		$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 		$uploadOk = 1;
-		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+		$imageFileType = pathinfo(basename($_FILES["fileToUpload"]["name"]),PATHINFO_EXTENSION);
+		$target_file = $target_dir . $user . "_" . $judul . "_" . $tanggal .".".$imageFileType;
 		// Check if image file is a actual image or fake image
 		if(isset($_POST["submit"])) {
 		    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -67,12 +67,12 @@ if(isset($_POST)){
 		$sql = "INSERT INTO `tb_post`(`username`,`post_title`,`post_date`,`post_content`, `image_path`) VALUES ('$user','$judul','$tanggal','$konten', 'img/aang.jpg')";
 		mysql_query($sql);
 
-		header("Location: home.php");
+		header("Location: index.php");
 		die();
 	}
 
 
-	//header("Location: home.php");
+	//header("Location: index.php");
 
 
 
